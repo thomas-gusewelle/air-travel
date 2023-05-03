@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Flights</title>
+   <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="components/navbar :: navbar"></div>
+<div class="container">
+    <h1>All Flights Available</h1>
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th class="col">Starting Location</th>
+                <th class="col">Ending Location</th>
+                <th class="col">Departure Date</th>
+                <th class="col">Return Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="flight : ${flights}">
+                <td th:text="${flight.getStartingLocation()}"></td>
+                <td th:text="${flight.getEndingLocation()}"></td>
+                <td th:text="${flight.getDepartureDate()}"></td>
+                <td th:text="${flight.getReturnDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/addFlight" class="btn btn-primary">Add Flight</a>
+</div>
+</div>
+</body>
+</html>
