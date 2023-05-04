@@ -4,19 +4,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-//public record Flight(String startingLocation, String endingLocation, Date departureDate, Date returndate, Integer numOfPeopletraveling) {
-//}
-
 public class Flight {
     private String startingLocation;
     private String endingLocation;
-    @DateTimeFormat(pattern = "yyyy-dd-mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
-    @DateTimeFormat(pattern = "yyyy-dd-mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date returnDate;
     private Integer numOfPeopleTraveling;
 
-
+//Getters and Setters
     public String getStartingLocation() {
         return startingLocation;
     }

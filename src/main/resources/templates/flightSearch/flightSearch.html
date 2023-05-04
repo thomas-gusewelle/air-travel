@@ -17,28 +17,30 @@
 <div th:replace="components/navbar :: navbar"></div>
 <div class="container my-4">
   <h1>Flight Search</h1>
-  <form>
+<!--  action maps to the get request for /results page-->
+<!--  th:name binds the inputs to @RequestParameters-->
+  <form th:action="@{/results}">
     <div class="form-group">
       <label for="startingLocation">Starting Location</label>
-      <input type="text" class="form-control" id="startingLocation" aria-describedby="startingLocationHelp" placeholder="Starting Location">
+      <input type="text" th:name="startingLocation"  required class="form-control" id="startingLocation" aria-describedby="startingLocationHelp" placeholder="Starting Location">
     </div>
     <div class="form-group">
       <label for="endingLocation">Ending Location</label>
-      <input type="text" class="form-control" id="endingLocation" placeholder="Ending Location">
+      <input type="text" th:name="endingLocation" required class="form-control" id="endingLocation" placeholder="Ending Location">
     </div>
     <div class="form-group">
       <label for="departureDate">Departure Date</label>
-      <input type="date" class="form-control" id="departureDate" >
+      <input type="date" th:name="departureDate" required class="form-control" id="departureDate" >
     </div>
     <div class="form-group">
       <label for="returnDate">Return Date</label>
-      <input type="date" class="form-control" id="returnDate" >
+      <input type="date" th:name="returnDate" required class="form-control" id="returnDate" >
     </div>
     <div class="form-group">
       <label for="numOfPeople">Number of People Traveling</label>
-      <input type="number" class="form-control" id="numOfPeople" >
+      <input type="number" th:name="numOfPeopleTraveling" required class="form-control" id="numOfPeople" >
     </div>
-    <button type="submit" class="mt-2 btn btn-primary">Submit</button>
+    <button type="submit" class="mt-2 btn btn-primary">Search</button>
   </form>
 </div>
 
