@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +32,18 @@ public class FlightSearchController {
     public String flightSearchResultsPage(@RequestParam String startingLocation, @RequestParam String endingLocation, @RequestParam String departureDate, @RequestParam String returnDate, @RequestParam String numOfPeopleTraveling, Model model) {
         List<Flight> filteredFlights = new ArrayList<>();
 //       TODO: add in filtering for dates as well.
-        filteredFlights = flights.stream().filter(flight -> (flight.getStartingLocation().equals(startingLocation) && flight.getEndingLocation().equals(endingLocation))).collect(Collectors.toList());
+Date _departureDate;
+Date _returnDate;
+        SimpleDateFormat formatter = new SimpleDateFormat("EE MMM d y H:m:s ZZZ");
+        try {
+             _departureDate = formatter.parse(departureDate);
+            _returnDate = formatter.parse(returnDate);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "redirect:/";
+        }
+        filteredFlights = flights.stream().filter(flight -> (flight.getStartingLocation().equals(startingLocation) && flight.getEndingLocation().equals(endingLocation) && flight.getDepartureDate().equals(_departureDate))).collect(Collectors.toList());
         model.addAttribute("filteredFlights", filteredFlights);
         model.addAttribute("numOfPeopleTraveling", numOfPeopleTraveling);
         return "/flightSearch/searchResults";
@@ -50,7 +63,6 @@ public class FlightSearchController {
 
     @PostMapping("/addFlight")
     public String addFlight(Model model, @ModelAttribute("newFlight") Flight newFlight) {
-//        Date departureDate = new Date(newFlight.getDepartureDate());
         flights.add(newFlight);
         model.addAttribute("newFlight", newFlight);
         return "redirect:/allFlights";
