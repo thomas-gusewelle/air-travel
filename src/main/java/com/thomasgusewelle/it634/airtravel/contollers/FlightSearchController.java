@@ -30,22 +30,27 @@ public class FlightSearchController {
     //   Points to the HTML file for showing search results
     @GetMapping("/results")
     public String flightSearchResultsPage(@RequestParam String startingLocation, @RequestParam String endingLocation, @RequestParam String departureDate, @RequestParam String returnDate, @RequestParam String numOfPeopleTraveling, Model model) {
-        List<Flight> filteredFlights = new ArrayList<>();
-//       TODO: add in filtering for dates as well.
-Date _departureDate;
-Date _returnDate;
-        SimpleDateFormat formatter = new SimpleDateFormat("EE MMM d y H:m:s ZZZ");
+        List<Flight> filteredFlights;
+//        Create date objects for parsing params
+        Date _departureDate;
+        Date _returnDate;
+//       Create formatter to turn string into date object
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        try Catch block for parsing dates from strings.
         try {
-             _departureDate = formatter.parse(departureDate);
+            _departureDate = formatter.parse(departureDate);
             _returnDate = formatter.parse(returnDate);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
+//            TODO: implement  better error handling for if dates are unable to parse
             e.printStackTrace();
             return "redirect:/";
         }
-        filteredFlights = flights.stream().filter(flight -> (flight.getStartingLocation().equals(startingLocation) && flight.getEndingLocation().equals(endingLocation) && flight.getDepartureDate().equals(_departureDate))).collect(Collectors.toList());
+//        Filters all flights based on starting and ending location and depature and return date
+        filteredFlights = flights.stream().filter(flight -> (flight.getStartingLocation().equals(startingLocation) && flight.getEndingLocation().equals(endingLocation) && flight.getDepartureDate().equals(_departureDate) && flight.getReturnDate().equals(_returnDate))).collect(Collectors.toList());
+//        Pass the models to the view
         model.addAttribute("filteredFlights", filteredFlights);
         model.addAttribute("numOfPeopleTraveling", numOfPeopleTraveling);
+//      return view
         return "/flightSearch/searchResults";
     }
 
