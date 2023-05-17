@@ -18,9 +18,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/assets/**").permitAll()
+                        .requestMatchers("/", "/home", "/assets/**", "/api/**", "/api/airport/test2").permitAll()
                         .anyRequest().authenticated()
-                )
+                ).csrf().disable()
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()

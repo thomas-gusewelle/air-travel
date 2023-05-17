@@ -1,6 +1,6 @@
 package com.thomasgusewelle.it634.airtravel.contollers;
 
-import com.thomasgusewelle.it634.airtravel.testData.Flight;
+import com.thomasgusewelle.it634.airtravel.models.Flight;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

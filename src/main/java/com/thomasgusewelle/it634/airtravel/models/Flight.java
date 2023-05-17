@@ -1,4 +1,4 @@
-package com.thomasgusewelle.it634.airtravel.testData;
+package com.thomasgusewelle.it634.airtravel.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
