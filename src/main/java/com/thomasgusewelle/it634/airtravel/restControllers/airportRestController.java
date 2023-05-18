@@ -8,10 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,24 +28,14 @@ public class airportRestController {
         return ResponseEntity.ok().body(wrapper);
     }
 
-    @GetMapping("/test2")
-    public ResponseEntity<Airport> getAirport(){
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-      List<Airport> airports = repo.findAll();
-      Airport airport = airports.get(0);
-      return new ResponseEntity<Airport>(airport, headers, HttpStatus.OK);
-    }
-
-    @GetMapping("/hello")
-    public ResponseEntity<String> helloWorld(){
-        return ResponseEntity.ok().body("Hello World");
-    }
-
-
     @GetMapping("/{id}")
-    public ResponseEntity<Airport> getAirportById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Airport> getAirportById(@PathVariable(value = "id") String id) {
         Optional<Airport> airport = repo.findById(id);
         return airport.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/{id}")
+    public Airport updateAirportById(@PathVariable(value = "id") String id, @RequestBody Airport airport){
+        return repo.save(airport);
     }
 }

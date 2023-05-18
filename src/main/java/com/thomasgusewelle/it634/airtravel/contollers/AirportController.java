@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -22,14 +25,22 @@ private airportRepository repo;
             model.addAttribute("airports", airports.getAirports());
         }
 
-        return "test";
+        return "/manage/airports/allAirports";
     }
-    @GetMapping("admin/test")
-    public String getTest(Model model){
-        RestTemplate rest = new RestTemplate();
 
-        Airport test = rest.getForObject("http://localhost:8080/api/airport/test2", Airport.class);
-        model.addAttribute("test", test);
-        return "test";
+
+    @GetMapping("/admin/airports/airport/edit/{id}")
+    public String getEditAirport(Model model, @PathVariable(value = "id") String id){
+
+        RestTemplate rest = new RestTemplate();
+        Airport airport = rest.getForObject("http://localhost:8080/api/airport/" + id, Airport.class);
+        model.addAttribute("airport", airport);
+      return "/manage/airports/editAirport";
+    }
+    @PostMapping("/admin/airports/airport/edit/{id}")
+    public String postEditAirport(@PathVariable(value = "id") String id, @ModelAttribute("editAirport") Airport editAirport){
+        RestTemplate rest = new RestTemplate();
+        Airport _editAirport = rest.postForObject("http://localhost:8080/api/airport/" + id, editAirport, Airport.class);
+        return "redirect:/admin/allAirports";
     }
 }

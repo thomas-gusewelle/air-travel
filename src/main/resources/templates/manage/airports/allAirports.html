@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All Airports</title>
+    <title>All Flights</title>
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<p>Hello Airports</p>
+<div th:replace="~{/components/navbar :: navbar}"></div>
+<div class="container">
+    <h1>All Airports</h1>
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th class="col">Abbreviation</th>
+                <th class="col">Name</th>
+                <th class="col">City</th>
+                <th class="col">State</th>
+                <th class="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="airport : ${airports}">
+                <td th:text="${airport.getAbbreviation()}"></td>
+                <td th:text="${airport.getName()}"></td>
+                <td th:text="${airport.getCity()}"></td>
+                <td th:text="${airport.getState()}"></td>
+                <td>
+                        <a th:href="@{/admin/airports/airport/edit/{id}(id=${airport.getId()})}" class="btn btn-primary">Edit</a>
+                        <a class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="/admin/airports/addAirport" class="btn btn-primary">Add Flight</a>
+    </div>
+</div>
+<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
