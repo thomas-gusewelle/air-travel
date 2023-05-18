@@ -6,6 +6,13 @@
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<!--Inline script for calling the delete airport route-->
+<!--fetch() is supported by all major browsers see: https://www.w3schools.com/jsref/api_fetch.asp -->
+<script th:inline="javascript">
+    async function deleteAirport(id) {
+        await fetch(`/admin/airports/airport/delete/${id}`, {method: "DELETE"});
+    }
+</script>
 <div th:replace="~{/components/navbar :: navbar}"></div>
 <div class="container">
     <h1>All Airports</h1>
@@ -26,14 +33,18 @@
                 <td th:text="${airport.getName()}"></td>
                 <td th:text="${airport.getCity()}"></td>
                 <td th:text="${airport.getState()}"></td>
+                <!--                Facilities the edit and delete buttons-->
                 <td>
-                        <a th:href="@{/admin/airports/airport/edit/{id}(id=${airport.getId()})}" class="btn btn-primary">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
+                    <!--                    a tag has an href to the edit page for each airport-->
+                    <a th:href="@{/admin/airports/airport/edit/{id}(id=${airport.getId()})}" class="btn btn-primary">Edit</a>
+                    <!--                    button has an onclick attribute that uses JS fetch function to call the delete mapping-->
+                    <button class="btn btn-danger" th:attr="onclick=|deleteAirport('${airport.getId()}')|">Delete
+                    </button>
                 </td>
             </tr>
             </tbody>
         </table>
-        <a href="/admin/airports/addAirport" class="btn btn-primary">Add Flight</a>
+        <a href="/admin/airports/airport/create" class="btn btn-primary">Add Airport</a>
     </div>
 </div>
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
