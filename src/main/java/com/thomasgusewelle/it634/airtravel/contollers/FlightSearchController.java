@@ -3,6 +3,7 @@ package com.thomasgusewelle.it634.airtravel.contollers;
 import com.thomasgusewelle.it634.airtravel.models.Airport;
 import com.thomasgusewelle.it634.airtravel.models.Flight;
 import com.thomasgusewelle.it634.airtravel.repositories.AirportRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FlightSearchController {
+    @Autowired
 private AirportRepository repo;
+
     private final List<Flight> flights = new ArrayList<>();
 
 
