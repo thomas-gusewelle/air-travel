@@ -1,7 +1,7 @@
 package com.thomasgusewelle.it634.airtravel.restControllers;
 
 import com.thomasgusewelle.it634.airtravel.models.Airport;
-import com.thomasgusewelle.it634.airtravel.repositories.airportRepository;
+import com.thomasgusewelle.it634.airtravel.repositories.AirportRepository;
 import com.thomasgusewelle.it634.airtravel.models.wrappers.AirportListWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class airportRestController {
 //    Sets up the repo for the airport table
     @Autowired
-    private airportRepository repo;
+    private AirportRepository repo;
 
 //    mapping for getting all of the airports
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)

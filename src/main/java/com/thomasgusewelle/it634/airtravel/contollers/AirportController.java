@@ -1,9 +1,7 @@
 package com.thomasgusewelle.it634.airtravel.contollers;
 
 import com.thomasgusewelle.it634.airtravel.models.Airport;
-import com.thomasgusewelle.it634.airtravel.repositories.airportRepository;
 import com.thomasgusewelle.it634.airtravel.models.wrappers.AirportListWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
