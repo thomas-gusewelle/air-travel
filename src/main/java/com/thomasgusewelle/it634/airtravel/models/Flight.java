@@ -1,12 +1,23 @@
 package com.thomasgusewelle.it634.airtravel.models;
 
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "flight")
 public class Flight {
-    private String startingLocation;
-    private String endingLocation;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false, nullable = false)
+    private Airport startingLocation;
+    @ManyToOne
+    @JoinColumn(name = "id", insertable = false, updatable = false, nullable = false)
+    private Airport endingLocation;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -14,22 +25,6 @@ public class Flight {
     private Integer numOfPeopleTraveling;
 
 //Getters and Setters
-    public String getStartingLocation() {
-        return startingLocation;
-    }
-
-    public void setStartingLocation(String startingLocation) {
-        this.startingLocation = startingLocation;
-    }
-
-    public String getEndingLocation() {
-        return endingLocation;
-    }
-
-    public void setEndingLocation(String endingLocation) {
-        this.endingLocation = endingLocation;
-    }
-
     public Date getDepartureDate() {
         return departureDate;
     }
@@ -52,5 +47,29 @@ public class Flight {
 
     public void setNumOfPeopleTraveling(Integer numOfPeopleTraveling) {
         this.numOfPeopleTraveling = numOfPeopleTraveling;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Airport getStartingLocation() {
+        return startingLocation;
+    }
+
+    public void setStartingLocation(Airport startingLocation) {
+        this.startingLocation = startingLocation;
+    }
+
+    public Airport getEndingLocation() {
+        return endingLocation;
+    }
+
+    public void setEndingLocation(Airport endinglocation) {
+       this.endingLocation = endinglocation;
     }
 }

@@ -2,6 +2,8 @@ package com.thomasgusewelle.it634.airtravel.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "airport")
 public class Airport {
@@ -12,7 +14,11 @@ public class Airport {
     public String name;
     public String city;
     public String state;
+    @OneToMany(mappedBy = "startingLocation")
+    private List<Flight> startingFlights;
 
+    @OneToMany(mappedBy = "endingLocation")
+    private List<Flight> endingFlights;
 
     public String getId() {
         return id;

@@ -54,24 +54,7 @@ public class FlightSearchController {
         return "/flightSearch/searchResults";
     }
 
-    @GetMapping("/allFlights")
-    public String allFlightsPage(Model model) {
-        model.addAttribute("flights", this.flights);
-        return "/manage/allFlights";
-    }
 
-    @GetMapping("/addFlight")
-    public String addFlightPage(Model model) {
-        model.addAttribute("newFlight", new Flight());
-        return "/manage/addFlight";
-    }
-
-    @PostMapping("/addFlight")
-    public String addFlight(Model model, @ModelAttribute("newFlight") Flight newFlight) {
-        flights.add(newFlight);
-        model.addAttribute("newFlight", newFlight);
-        return "redirect:/allFlights";
-    }
 
 
 }
