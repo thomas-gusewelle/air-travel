@@ -3,47 +3,50 @@
       lang="english">
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.111.3">
-  <title>Flight Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>Flight Search</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
-  <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="">
 <div th:replace="components/navbar :: navbar"></div>
 <div class="container my-4">
-  <h1>Flight Search</h1>
-<!--  action maps to the get request for /results page-->
-<!--  th:name binds the inputs to @RequestParameters-->
-  <form th:action="@{/results}">
-    <div class="form-group">
-      <label for="startingLocation">Starting Location</label>
-     <select class="form-select" name="startingLocation" id="startingLocation" th:name="startingLocation">
-<option th:each="airport : ${airports}" th:value="${airport}" th:text="${airport.getAbbreviation()} + ' - ' + ${airport.getName()}"></option>
-     </select>
-    </div>
-    <div class="form-group">
-      <label for="endingLocation">Ending Location</label>
-      <input type="text" th:name="endingLocation" required class="form-control" id="endingLocation" placeholder="Ending Location">
-    </div>
-    <div class="form-group">
-      <label for="departureDate">Departure Date</label>
-      <input type="date" th:name="departureDate" required class="form-control" id="departureDate" >
-    </div>
-    <div class="form-group">
-      <label for="returnDate">Return Date</label>
-      <input type="date" th:name="returnDate" required class="form-control" id="returnDate" >
-    </div>
-    <div class="form-group">
-      <label for="numOfPeople">Number of People Traveling</label>
-      <input type="number" th:name="numOfPeopleTraveling" required class="form-control" id="numOfPeople" >
-    </div>
-    <button type="submit" class="mt-2 btn btn-primary">Search</button>
-  </form>
+    <h1>Flight Search</h1>
+    <!--  action maps to the get request for /results page-->
+    <!--  th:name binds the inputs to @RequestParameters-->
+    <form th:action="@{/results}">
+        <div class="form-group">
+            <label for="startingLocation">Starting Location</label>
+            <select class="form-select" name="startingLocation" id="startingLocation" th:name="startingLocation">
+                <option th:each="airport : ${airports}" th:value="${airport}"
+                        th:text="${airport.getAbbreviation()} + ' - ' + ${airport.getName()}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="endingLocation">Ending Location</label>
+            <select class="form-select" name="endingLocation" id="endingLocation" th:name="startingLocation">
+                <option th:each="airport : ${airports}" th:value="${airport}"
+                        th:text="${airport.getAbbreviation()} + ' - ' + ${airport.getName()}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="departureDate">Departure Date</label>
+            <input type="date" th:name="departureDate" required class="form-control" id="departureDate">
+        </div>
+        <div class="form-group">
+            <label for="returnDate">Return Date</label>
+            <input type="date" th:name="returnDate" required class="form-control" id="returnDate">
+        </div>
+        <div class="form-group">
+            <label for="numOfPeople">Number of People Traveling</label>
+            <input type="number" th:name="numOfPeopleTraveling" required class="form-control" id="numOfPeople">
+        </div>
+        <button type="submit" class="mt-2 btn btn-primary">Search</button>
+    </form>
 </div>
 
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>

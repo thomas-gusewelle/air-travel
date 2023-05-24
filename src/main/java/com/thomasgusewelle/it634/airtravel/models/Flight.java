@@ -13,10 +13,10 @@ public class Flight {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "starting_airport_id")
     private Airport startingLocation;
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "ending_airport_id")
     private Airport endingLocation;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
@@ -24,7 +24,7 @@ public class Flight {
     private Date returnDate;
     private Integer numOfPeopleTraveling;
 
-//Getters and Setters
+    //Getters and Setters
     public Date getDepartureDate() {
         return departureDate;
     }
@@ -70,6 +70,6 @@ public class Flight {
     }
 
     public void setEndingLocation(Airport endinglocation) {
-       this.endingLocation = endinglocation;
+        this.endingLocation = endinglocation;
     }
 }

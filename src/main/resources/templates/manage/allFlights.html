@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>All Flights</title>
-   <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div th:replace="~{components/navbar :: navbar}"></div>
@@ -21,9 +21,9 @@
             </thead>
             <tbody>
             <tr th:each="flight : ${flights}">
-                <td th:text="${flight.getStartingLocation()}"></td>
-                <td th:text="${flight.getEndingLocation()}"></td>
-<!--                EEE, MMM d, yyyy == Wed, Jun 5, 2023-->
+                <td th:text="${flight.getStartingLocation().getName()}"></td>
+                <td th:text="${flight.getEndingLocation().getName()}"></td>
+                <!--                EEE, MMM d, yyyy == Wed, Jun 5, 2023-->
                 <td th:text="${#dates.format(flight.getDepartureDate(), 'EEE, MMM d, yyyy')}"></td>
                 <td th:text="${#dates.format(flight.getReturnDate(), 'EEE, MMM d, yyyy')}"></td>
 
@@ -31,7 +31,7 @@
             </tbody>
         </table>
         <a href="/addFlight" class="btn btn-primary">Add Flight</a>
-</div>
+    </div>
 </div>
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
