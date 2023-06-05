@@ -14,10 +14,10 @@ public class Airport {
     public String name;
     public String city;
     public String state;
-    @OneToMany(mappedBy = "startingLocation")
+    @OneToMany(mappedBy = "startingLocation", cascade = CascadeType.REMOVE)
     private List<Flight> startingFlights;
 
-    @OneToMany(mappedBy = "endingLocation")
+    @OneToMany(mappedBy = "endingLocation", cascade = CascadeType.REMOVE)
     private List<Flight> endingFlights;
 
     public String getId() {

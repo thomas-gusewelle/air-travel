@@ -15,41 +15,42 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/airport")
 public class airportRestController {
-//    Sets up the repo for the airport table
+    //    Sets up the repo for the airport table
     @Autowired
-    private AirportRepository repo;
+    private AirportRepository airportRepo;
 
-//    mapping for getting all of the airports
+    //    mapping for getting all of the airports
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AirportListWrapper> getAllAirports() {
         AirportListWrapper wrapper = new AirportListWrapper();
-        List<Airport> airports = repo.findAll();
+        List<Airport> airports = airportRepo.findAll();
         wrapper.setAirports(airports);
         return ResponseEntity.ok().body(wrapper);
     }
 
-//    Post for creating an airport
+    //    Post for creating an airport
     @PostMapping("/create")
-    public Airport createAirport(@RequestBody Airport airport){
-       return repo.save(airport);
+    public Airport createAirport(@RequestBody Airport airport) {
+        return airportRepo.save(airport);
     }
 
-//    Returns the airport based on an id if it exists
+    //    Returns the airport based on an id if it exists
     @GetMapping("/{id}")
     public ResponseEntity<Airport> getAirportById(@PathVariable(value = "id") String id) {
-        Optional<Airport> airport = repo.findById(id);
+        Optional<Airport> airport = airportRepo.findById(id);
         return airport.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-//    Post for updating an airport
+    //    Post for updating an airport
     @PostMapping("/{id}")
-    public Airport updateAirportById(@PathVariable(value = "id") String id, @RequestBody Airport airport){
-        return repo.save(airport);
+    public Airport updateAirportById(@PathVariable(value = "id") String id, @RequestBody Airport airport) {
+        return airportRepo.save(airport);
     }
-//    Delete for deleting an airport. First finds the airport and if it exists deletes it.
+
+    //    Delete for deleting an airport. First finds the airport and if it exists deletes it.
     @DeleteMapping("/{id}")
-    public void deleteAirport(@PathVariable(value = "id") String id){
-        Optional<Airport> airport = repo.findById(id);
-        airport.ifPresent(value -> repo.delete(value));
+    public void deleteAirport(@PathVariable(value = "id") String id) {
+        Optional<Airport> airport = airportRepo.findById(id);
+        airport.ifPresent(value -> airportRepo.delete(value));
     }
 }

@@ -8,44 +8,45 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>Flight Search</title>
+    <title>Edit Flight</title>
 
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="">
 <div th:replace="components/navbar :: navbar"></div>
 <div class="container my-4">
-    <h1>Flight Search</h1>
-    <!--  action maps to the get request for /results page-->
-    <!--  th:name binds the inputs to @RequestParameters-->
-    <form th:action="@{/results}">
+    <h1>Edit A Flight</h1>
+    <form th:action="@{/flight/edit}" method="post" th:object="${flight}">
         <div class="form-group">
             <label for="startingLocation">Starting Location</label>
-            <select class="form-select" name="startingLocation" id="startingLocation" th:name="startingLocation">
+            <select class="form-select" name="startingLocation" id="startingLocation" th:name="startingLocation"
+                    th:field="*{startingLocation}">
+                <!--                value must be the same as the foreign key-->
                 <option th:each="airport : ${airports}" th:value="${airport.getId()}"
                         th:text="${airport.getAbbreviation()} + ' - ' + ${airport.getName()}"></option>
             </select>
         </div>
         <div class="form-group">
             <label for="endingLocation">Ending Location</label>
-            <select class="form-select" name="endingLocation" id="endingLocation" th:name="endingLocation">
+            <select class="form-select" name="endingLocation" id="endingLocation" th:name="startingLocation"
+                    th:field="*{endingLocation}">
+                <!--                value must be the same as the foreign key-->
                 <option th:each="airport : ${airports}" th:value="${airport.getId()}"
                         th:text="${airport.getAbbreviation()} + ' - ' + ${airport.getName()}"></option>
             </select>
         </div>
         <div class="form-group">
             <label for="departureDate">Departure Date</label>
-            <input type="date" th:name="departureDate" required class="form-control" id="departureDate">
+            <input type="date" th:field="*{departureDate}" class="form-control" id="departureDate">
         </div>
         <div class="form-group">
             <label for="returnDate">Return Date</label>
-            <input type="date" th:name="returnDate" required class="form-control" id="returnDate">
+            <input type="date" th:field="*{returnDate}" class="form-control" id="returnDate">
         </div>
-        <div class="form-group">
-            <label for="numOfPeople">Number of People Traveling</label>
-            <input type="number" th:name="numOfPeopleTraveling" required class="form-control" id="numOfPeople">
-        </div>
-        <button type="submit" class="mt-2 btn btn-primary">Search</button>
+        <!--        Hidden input for id so that save() updates the existing row and does not create a new one-->
+        <input type="hidden" th:value="${flight.getId()}" th:name="id" th:field="*{id}"></input>>
+        <button type="submit" class="mt-2 btn btn-primary">Submit</button>
     </form>
 </div>
 

@@ -11,6 +11,8 @@
 <script th:inline="javascript">
     async function deleteAirport(id) {
         await fetch(`/admin/airports/airport/delete/${id}`, {method: "DELETE"});
+        // reload the page to show changes
+        location.reload();
     }
 </script>
 <div th:replace="~{/components/navbar :: navbar}"></div>

@@ -26,7 +26,13 @@
                 <!--                EEE, MMM d, yyyy == Wed, Jun 5, 2023-->
                 <td th:text="${#dates.format(flight.getDepartureDate(), 'EEE, MMM d, yyyy')}"></td>
                 <td th:text="${#dates.format(flight.getReturnDate(), 'EEE, MMM d, yyyy')}"></td>
-
+                <td>
+                    <!--                    a tag has an href to the edit page for each airport-->
+                    <a th:href="@{/flight/edit/{id}(id=${flight.getId()})}" class="btn btn-primary">Edit</a>
+                    <!--                    button has an onclick attribute that uses JS fetch function to call the delete mapping-->
+                    <button class="btn btn-danger" th:attr="onclick=|deleteFlight('${flight.getId()}')|">Delete
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -34,5 +40,14 @@
     </div>
 </div>
 <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+<!--Inline script for calling the delete airport route-->
+<!--fetch() is supported by all major browsers see: https://www.w3schools.com/jsref/api_fetch.asp -->
+<script th:inline="javascript">
+    async function deleteFlight(id) {
+        await fetch(`/flight/delete/${id}`, {method: "DELETE"})
+        // refreshes the window to show updated state
+        location.reload();
+    }
+</script>
 </body>
 </html>
