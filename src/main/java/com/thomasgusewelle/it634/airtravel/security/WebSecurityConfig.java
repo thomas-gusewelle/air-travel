@@ -22,8 +22,8 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
 
-                        .requestMatchers("/", "/home", "/assets/**", "/api/**", "/api/airport/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/", "/home", "/assets/**", "/api/**", "/api/airport/**", "/signup**").permitAll()
+                        .anyRequest().authenticated()
                 ).csrf().disable()
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -34,17 +34,17 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user =
+//                User.withDefaultPasswordEncoder()
+//                        .username("user")
+//                        .password("password")
+//                        .roles("USER")
+//                        .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

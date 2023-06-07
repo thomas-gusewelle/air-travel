@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -35,6 +35,15 @@
                         <li><a class="dropdown-item" href="/admin/allAirports">Manage Airports</a></li>
                         <li><a class="dropdown-item" href="/admin/airports/airport/create">Add Airport</a></li>
                     </ul>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="btn btn-primary" href="/login">Login</a>
+                </li>
+                <li sec:authorize="isAnonymous()" class="nav-item">
+                    <a class="btn btn-dark" href="/signup">Sign Up</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="btn btn-dark" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
