@@ -2,17 +2,14 @@ package com.thomasgusewelle.it634.airtravel.security;
 
 import com.thomasgusewelle.it634.airtravel.models.CustomUser;
 import com.thomasgusewelle.it634.airtravel.models.wrappers.CustomUserWrapper;
-import com.thomasgusewelle.it634.airtravel.utils.XmlTools;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -46,6 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         DeleteUserXml(user);
     }
 
+    //    Private methods for working with XML
     private static void UserToXML(CustomUser user) throws JAXBException {
 //        Creates JAXB instance and marshaller
         JAXBContext jaxbContext;
@@ -92,6 +90,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 //        get all users so that we can add the new user to the existing list
         CustomUserWrapper users = getUsersXML();
+//        Delete User
         users.deleteUser(user);
 //        Push users to file
         File file = new File("src/main/java/com/thomasgusewelle/it634/airtravel/users.xml");

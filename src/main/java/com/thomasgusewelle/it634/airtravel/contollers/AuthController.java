@@ -33,6 +33,7 @@ public class AuthController {
             customUserDetailsService.createUser(user);
         } catch (JAXBException e) {
             System.out.println(e);
+//            redirect back to signup on error
             return "redirect:/signup?error";
         }
         return "redirect:/login";

@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.util.Collection;
 
+// Customer user object that implements the UserDetails requried by Spring Security
+// Xml elements are for XML marshaling
 @XmlRootElement(name = "CustomUser")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomUser implements Serializable, UserDetails {
