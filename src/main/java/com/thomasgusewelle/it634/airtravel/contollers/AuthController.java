@@ -46,6 +46,6 @@ public class AuthController {
             System.err.println(e);
             return "redirect:/";
         }
-        return "/signup";
+        return "redirect:/signup";
     }
 }
