@@ -1,5 +1,6 @@
 package com.thomasgusewelle.it634.airtravel.models;
 
+import jakarta.persistence.OneToMany;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 // Customer user object that implements the UserDetails requried by Spring Security
 // Xml elements are for XML marshaling
@@ -22,6 +24,7 @@ public class CustomUser implements Serializable, UserDetails {
     private String email;
     @NonNull
     private String password;
+
 
     public CustomUser() {
         this.email = "";

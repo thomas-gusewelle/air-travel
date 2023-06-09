@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Flight Search Results</title>
@@ -23,6 +23,7 @@
                 <th class="col">Departure Date</th>
                 <th class="col">Return Date</th>
                 <th class="col">Number of Tickets</th>
+                <th class="col">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,11 @@
                 <td th:text="${#dates.format(flight.getDepartureDate(), 'EEE, MMM d, yyyy')}"></td>
                 <td th:text="${#dates.format(flight.getReturnDate(), 'EEE, MMM d, yyyy')}"></td>
                 <td th:text="${numOfPeopleTraveling}"></td>
+                <td>
+                    <form th:action="@{/bookFlight/{id}(id = ${flight.getId()})}" method="post">
+                        <button type="submit" class="btn btn-primary">Book Flight</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

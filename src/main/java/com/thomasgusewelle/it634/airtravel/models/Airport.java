@@ -20,6 +20,7 @@ public class Airport {
     @OneToMany(mappedBy = "endingLocation", cascade = CascadeType.REMOVE)
     private List<Flight> endingFlights;
 
+
     public String getId() {
         return id;
     }

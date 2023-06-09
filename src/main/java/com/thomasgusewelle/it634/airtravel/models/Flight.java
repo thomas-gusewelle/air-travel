@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "flight")
@@ -18,6 +19,10 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "ending_airport_id")
     private Airport endingLocation;
+
+    @OneToMany(mappedBy = "flight")
+    private List<BookedFlights> bookedFlights;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -71,5 +76,14 @@ public class Flight {
 
     public void setEndingLocation(Airport endinglocation) {
         this.endingLocation = endinglocation;
+    }
+
+
+    public List<BookedFlights> getBookedFlights() {
+        return bookedFlights;
+    }
+
+    public void setBookedFlights(List<BookedFlights> bookedFlights) {
+        this.bookedFlights = bookedFlights;
     }
 }
